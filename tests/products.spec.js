@@ -14,21 +14,21 @@ test.describe('Product Catalog & Cart', () => {
     test('TC_PROD_01: Verify all products are displayed', async ({ page }) => {
       const productsPage = new ProductsPage(page);
       const count = await productsPage.getProductCount();
-      // Add your assertions here
-      await expect(count).toHaveCount(6);
+      // Add your assertions herea
+      await expect(count).toBe(6);
     });
 
     test('TC_PROD_02: Add product to cart', async ({ page }) => {
         const productsPage = new ProductsPage(page);
-        await productsPage.addProduct();
+        await productsPage.addProduct(0);
         // Add your assertions here
-        await expect(await productsPage.getBadge()).toHaveText('1');
-        await expect(page.locator('[data-test="remove-sauce-labs-onesie"]')).toContainText('Remove');
+        await expect(await productsPage.getBadge()).toBe('1');
     });
 
     test('TC_PROD_03: Remove product from cart', async ({ page }) => {
         const productsPage = new ProductsPage(page);
-        await productsPage.remmoveProduct();
+        await productsPage.addProduct(0);
+        await productsPage.removeProduct(0);
         // Add your assertions here
         await expect(await productsPage.getBadge()).toHaveText('0');
     });

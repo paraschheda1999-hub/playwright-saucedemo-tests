@@ -3,26 +3,26 @@
 class ProductsPage {
     constructor(page) {
       this.page = page;
-      this.inventoryList = page.locator('[data-test="inventory-list"]');
-      this.shoppingCart = page.locator('[data-test="shopping-cart-link"]');
+      this.inventoryItems = page.locator('.inventory_item');
+      this.shoppingCartBadge = page.locator('.shopping_cart_badge');
       this.productSortContainer = page.locator('[data-test="product-sort-container"]');
     }
 
     
     async getProductCount() {
-        return await this.inventoryList.count();
+        return await this.inventoryItems.count();
     }
   
-    async addProduct() {
-        await this.page.locator('[data-test="add-to-cart-sauce-labs-onesie"]').click();
+    async addProduct(index) {
+        await this.page.locator('.inventory_item button').nth(index).click();
     }
 
-    async remmoveProduct() {
-        await this.page.locator('[data-test="remove-sauce-labs-onesie"]').click();
+    async removeProduct(index) {
+        await this.page.locator('.inventory_item button').nth(index).click();
     }
 
     async getBadge() {
-        await this.shoppingCart.textContent();
+        return await this.shoppingCartBadge.textContent();
     }
   }
   
